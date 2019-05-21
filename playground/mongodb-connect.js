@@ -1,4 +1,9 @@
-const MongoClient= require('mongodb').MongoClient;
+//const MongoClient= require('mongodb').MongoClient;
+const {MongoClient, ObjectID}= require('mongodb');
+
+var obj=new ObjectID();
+console.log(obj);
+
 //se crea el cliente de mongo, se conecta al servidor
 //mongo y se crea la bd
 MongoClient.connect("mongodb://localhost:27017/TodoApp", { useNewUrlParser: true }, (err,client)=>{
