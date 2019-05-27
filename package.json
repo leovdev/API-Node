@@ -1,0 +1,26 @@
+{
+  "name": "api-todo",
+  "version": "1.0.0",
+  "description": "API using nodejs and mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeonelVinasco/API-Node.git"
+  },
+  "keywords": [
+    "node",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeonelVinasco/API-Node/issues"
+  },
+  "homepage": "https://github.com/LeonelVinasco/API-Node#readme",
+  "dependencies": {
+    "mongodb": "^3.2.5"
+  }
+}
