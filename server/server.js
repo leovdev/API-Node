@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/TodoApp');
-
+mongoose.connect('mongodb://localhost:27017/TodoApp', { useNewUrlParser: true });
+//const db = mongoose.db('TodoApp');
 //save new Something
 var Todo = mongoose.model('Todo', {
   text: {
@@ -16,7 +16,9 @@ var Todo = mongoose.model('Todo', {
 });
 
 var newTodo = new Todo({
-  text: 'Cook dinner'
+  text: 'Cook dinner',
+  completed: false,
+  completedAt: 201905271513
 });
 
 newTodo.save().then((doc)=>{
