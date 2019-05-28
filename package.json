@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/LeonelVinasco/API-Node#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
     "mongodb": "^3.2.5",
     "mongoose": "^5.5.11"
   }
