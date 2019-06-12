@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 
 
 var {mongoose}= require('./db/mongoose');
+var {ObjectID}= require('mongodb');
 var {Todo}= require('./models/todo');
 var {User}= require('./models/user');
 
@@ -31,6 +32,25 @@ app.get('/todos', (req, res)=>{
 })
 
 });
+
+app.get('/todos/:id', (req,res)=>{
+  var idAPI=req.params.id;
+
+  if (mongoose.Types.ObjectId.isValid(idAPI)){
+    Todo.findById(idAPI).then((todo)=>{
+      if (!todo){
+        return res.status(404).send();
+      }
+      res.send({todo});
+    }).catch((e)=> {  res.status(404).send();})
+
+  }else{
+      return res.status(404).send("The id is not valid");
+  }
+
+
+});
+
 
 app.post('/users', (req,res)=>{
 
