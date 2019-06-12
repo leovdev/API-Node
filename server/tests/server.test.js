@@ -6,8 +6,15 @@ var {Todo}= require('./../models/todo');
 const {app} =require('./../server');
 //const {Todo} require('./server/models/todo.js');
 
+const todos = [{
+  text:'First test'
+},{
+  text:'second test'
+}];
 beforeEach((done) =>{ //With this method our database ir going to be empty before every request
-  Todo.deleteMany({}).then(()=>done());
+  Todo.deleteMany({}).then(()=>{
+    return Todo.insertMany(todos);
+  }).then(()=>done());
 });
 
 debugger
@@ -28,7 +35,7 @@ debugger
            return done(err);
          }
 //debugger
-         Todo.find().then((todos)=>{
+         Todo.find({text}).then((todos)=>{
            expect(todos.length).toBe(1); //espera que la respuesta sea solo una. Por ello la bd debe
            expect(todos[0].text).toBe(text); //estar desocupada. Para ello lo del beforeEach del principio.
            done(); //esta parte asume que los todos son 1 solo. todos.length se refiere a eso.
@@ -48,13 +55,21 @@ debugger
 
         }
         Todo.find().then((todos)=>{
-          expect(todos.length).toBe(0);
+          expect(todos.length).toBe(2);
           done();
         }).catch((e)=>done(e));
       });
+  });
+});
 
-
-
-
+describe('GET /todos', ()=>{
+  it('should get all todos', (done)=>{
+    request(app)
+      .get('/todos')
+      .expect(200)
+      .expect((res)=>{
+        expect(res.body.todos.length).toBe(2);
+      })
+      .end(done);
   });
 });
