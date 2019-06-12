@@ -7,12 +7,13 @@ const {app} =require('./../server');
 //const {Todo} require('./server/models/todo.js');
 
 beforeEach((done) =>{ //With this method our database ir going to be empty before every request
-  Todo.remove({}).then(()=>done());
+  Todo.deleteMany({}).then(()=>done());
 });
 
-
+debugger
 describe('POST /todos', ()=>{
   it('should create a new todo', (done)=>{
+debugger
     var text= 'text todo text';
 
     request(app)
@@ -26,7 +27,7 @@ describe('POST /todos', ()=>{
          if (err) {
            return done(err);
          }
-
+debugger
          Todo.find().then((todos)=>{
            expect(todos.length).toBe(1);
            expect(todos[0].text).toBe(text);
