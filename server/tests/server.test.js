@@ -27,12 +27,34 @@ debugger
          if (err) {
            return done(err);
          }
-debugger
+//debugger
          Todo.find().then((todos)=>{
-           expect(todos.length).toBe(1);
-           expect(todos[0].text).toBe(text);
-           done();
+           expect(todos.length).toBe(1); //espera que la respuesta sea solo una. Por ello la bd debe
+           expect(todos[0].text).toBe(text); //estar desocupada. Para ello lo del beforeEach del principio.
+           done(); //esta parte asume que los todos son 1 solo. todos.length se refiere a eso.
          }).catch((e)=> done(e));
        });
+  });
+
+  it('should not create todo with invalid body data', (done)=>{
+
+     request(app)
+      .post('/todos')
+      .send({})
+      .expect(400)
+      .end((err,res)=>{
+        if (err){
+        return done(err);
+
+        }
+        Todo.find().then((todos)=>{
+          expect(todos.length).toBe(0);
+          done();
+        }).catch((e)=>done(e));
+      });
+
+
+
+
   });
 });
