@@ -32,6 +32,28 @@ app.get('/todos', (req, res)=>{
 
 });
 
+app.post('/users', (req,res)=>{
+
+    var user = new User({
+      email: req.body.email
+    });
+ console.log(req.body.email);
+    user.save().then((doc)=>{
+      res.send(doc);
+    }, (e)=>{
+          res.status(400).send(e);
+    });
+});
+
+app.get('/users', (req, res)=>{
+  User.find().then((users)=>{
+    res.send({users});
+}, (e)=>{
+  res.status(400).send(e);
+})
+
+});
+
 app.listen(3000, ()=>{
   console.log('Started on port 3000');
 });
